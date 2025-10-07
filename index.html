@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>QuickBite — Quick Food Delivery</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="app">
+    <header class="topbar">
+      <div class="brand">
+        <div class="logo">🍕</div>
+        <div class="title">QuickBite</div>
+      </div>
+
+      <div class="header-actions">
+        <div class="search-wrap">
+          <input id="searchInput" type="search" placeholder="Search dishes, e.g. Margherita" />
+        </div>
+        <button class="floating-btn small tracking-icon" id="trackingIcon" title="Tracking" aria-label="tracking">📍</button>
+        <button class="floating-btn small cart-icon" id="cartToggleBtn" title="Cart" aria-label="cart">🛒
+          <span class="cart-count" id="cartCount">0</span>
+        </button>
+      </div>
+    </header>
+
+    <main class="container">
+      <section class="hero">
+        <h1>Delicious meals delivered fast 🍽️</h1>
+        <p class="subtitle">Hot & fresh — from our kitchen to your door.</p>
+      </section>
+
+      <section class="menu-section card">
+        <div class="menu-top">
+          <h2>Our Menu</h2>
+          <div class="category-buttons" id="categoryButtons">
+            <button class="chip active" data-cat="all">All</button>
+            <button class="chip" data-cat="pizza">Pizza</button>
+            <button class="chip" data-cat="burger">Burgers</button>
+            <button class="chip" data-cat="pasta">Pasta</button>
+            <button class="chip" data-cat="dessert">Desserts</button>
+          </div>
+        </div>
+
+        <div id="foodGrid" class="food-grid" aria-live="polite"></div>
+      </section>
+    </main>
+  </div>
+
+  <!-- Cart Drawer -->
+  <aside class="drawer cart-drawer" id="cartDrawer" aria-hidden="true">
+    <div class="drawer-header">
+      <h3>Your Cart</h3>
+      <button class="close-drawer" id="closeCart">✕</button>
+    </div>
+    <div id="cartItems" class="drawer-body empty">Your cart is empty</div>
+    <div class="drawer-footer">
+      <div id="cartTotal" class="cart-total">Total: ₹0.00</div>
+      <button id="checkoutBtn" class="btn primary" style="display:none">Order Now</button>
+    </div>
+  </aside>
+
+  <!-- Tracking Drawer -->
+  <aside class="drawer tracking-drawer" id="trackingDrawer" aria-hidden="true">
+    <div class="drawer-header">
+      <h3>Order Tracking</h3>
+      <button class="close-drawer" id="closeTracking">✕</button>
+    </div>
+
+    <div class="drawer-body">
+      <div class="tracking-title">Real-Time Order Status</div>
+      <div class="tracking-steps" id="trackingSteps">
+        <div class="tracking-step" data-step="1"><div class="circle">1</div><div class="label">Confirmed</div></div>
+        <div class="tracking-step" data-step="2"><div class="circle">2</div><div class="label">Prepping</div></div>
+        <div class="tracking-step" data-step="3"><div class="circle">3</div><div class="label">Out for Delivery</div></div>
+        <div class="tracking-step" data-step="4"><div class="circle">4</div><div class="label">Delivered</div></div>
+      </div>
+
+      <div class="estimate">
+        ETA: <span id="deliveryEstimate">--</span> min
+      </div>
+    </div>
+  </aside>
+
+  <!-- Payment Modal -->
+  <div class="modal" id="paymentModal" aria-hidden="true">
+    <div class="modal-card">
+      <button class="modal-close" id="closePaymentModal">✕</button>
+      <h3>Choose Payment</h3>
+      <div class="payment-options" id="paymentOptions">
+        <div class="payment-option" data-method="UPI">🔹 UPI</div>
+        <div class="payment-option" data-method="Card">💳 Card</div>
+        <div class="payment-option" data-method="NetBanking">🏦 Net Banking</div>
+        <div class="payment-option" data-method="Wallet">💰 Wallet</div>
+        <div class="payment-option" data-method="COD">🛵 Cash on Delivery</div>
+      </div>
+      <button id="payNowBtn" class="btn primary">Pay Now</button>
+    </div>
+  </div>
+
+  <!-- Rating Modal -->
+  <div class="modal" id="ratingModal" aria-hidden="true">
+    <div class="modal-card">
+      <button class="modal-close" id="closeRatingModal">✕</button>
+      <h3>Rate your order</h3>
+      <div id="orderIdDisplay">Order: #000</div>
+      <div class="star-rating" id="starRating" aria-label="rating">
+        <span data-rating="5">★</span><span data-rating="4">★</span><span data-rating="3">★</span><span data-rating="2">★</span><span data-rating="1">★</span>
+      </div>
+      <textarea id="feedbackText" placeholder="Optional feedback..."></textarea>
+      <button id="submitFeedbackBtn" class="btn primary">Submit</button>
+    </div>
+  </div>
+
+  <!-- Delivery Notification -->
+  <div id="deliveryNotification" class="delivery-notif" role="status" aria-live="polite">✅ Your Order Has Been Delivered!</div>
+
+  <script src="script.js" defer></script>
+</body>
+</html>
